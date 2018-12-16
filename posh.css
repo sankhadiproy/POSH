@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+h1 {
+  text-align: center;
+  color: green;
+}
+
+h2 {
+  text-align: left;
+  color: green;
+}
+
+hr {
+  display: block;  
+  color: #f00;
+  background-color: #f00;
+  height: 5px;
+}
+
+
+div {
+  text-align: justify;
+  text-justify: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #d3d3d3}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+</style>
+</head>
+</html>
