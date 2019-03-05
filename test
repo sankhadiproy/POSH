@@ -1,0 +1,34 @@
+Hello Team,
+
+As per my thread title, I am unable to remote a 2016 DC. Following is the scenario;
+
+My current forest structure is like <i>site1.childdomain.parentdomain.com</i>.
+I am remoting through parentdomain.com. There is not trust between them. Its different entity, for testing purpose only.
+So I added <i>*.childdomain.parentdomain.com</i> in trustedhost list. And then I was able to remote a <i>site1.childdomain.parentdomain.com</i> DC using its specif credential.
+But I am unable to remote at <i>site2.childdomain.parentdomain.com</i> dcs.
+
+I checked, IPv6 was Disable, Firewall was disabled, WSman running, its server 2016, yet I executed enable-psremoting, winrm qc. But no luck.
+
+<b>Following is the error when I use ICM {gps} -cn <i>DC02.site2.childdomain.parentdomain.com</i>.</b>
+[pre]Connecting to remote server <i>DC02.site2.childdomain.parentdomain.com</i> failed with the following error message : A specified
+logon session does not exist. It may already have been terminated. For more information, see the about_Remote_Troubleshooting Help topic.
++ CategoryInfo : OpenError: (<i>DC02.site2.childdomain.parentdomain.com</i>:String) [], PSRemotingTransportException
++ FullyQualifiedErrorId : 1312,PSSessionStateBroken
+[/pre]
+<b>Following is the output of Test-wsman -cn <i>DC02.site2.childdomain.parentdomain.com</i> -Authentication Negotiate -Credential $cred </b>
+[pre]Test-WSMan : <f:WSManFault xmlns:f="http://schemas.microsoft.com/wbem/wsman/1/wsmanfault" Code="5" Machine="mypc.parentdomain.com"><f:Message>Access
+is denied. </f:Message></f:WSManFault>
+At line:1 char:1
++ Test-WSMan -cn "<i>DC02.site2.childdomain.parentdomain.com</i>" -Authentication Negotiate - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ CategoryInfo : InvalidOperation: (<i>DC02.site2.childdomain.parentdomain.com</i>:String) [Test-WSMan], InvalidOperationException
++ FullyQualifiedErrorId : WsManError,Microsoft.WSMan.Management.TestWSManCommand
+[/pre]
+Finally, I did mstsc to the <i>DC02.<b>site1</b>.childdomain.parentdomain.com</i>, and use enter-pssession <i>DC02.<b>site2</b>.childdomain.parentdomain.com</i>. Now it worked.
+
+I got frustrated. What is the issue then? Is any thing wrong with trusted host? I am suspecting this one, but as per logic it shouldn't be the issue.
+Could anyone point me out.
+
+Thank you.
+
+Roy.
